@@ -7,5 +7,7 @@ namespace BEBarberShop.Domain.IRepositories
         Task<Usuario> IniciarSesion(Usuario user);
 
         Task GuardarUsuario(Usuario user);
+
+        Task<List<Usuario>> GetUsuarios();
     }
 }
