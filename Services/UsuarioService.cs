@@ -13,6 +13,26 @@ namespace BEBarberShop.Services
             _usuarioRepository = usuarioRepository;
         }
 
+        public async Task<Usuario> BuscarUsuario(int user)
+        {
+            return await _usuarioRepository.BuscarUsuario(user);
+        }
+
+        public async Task EditarUsuario(Usuario user)
+        {
+            await _usuarioRepository.EditarUsuario(user);
+        }
+
+        public async Task EliminarUsuario(Usuario user)
+        {
+            await _usuarioRepository.EliminarUsuario(user);
+        }
+
+        public async Task<List<Usuario>> GetUsuarios()
+        {
+          return  await _usuarioRepository.GetUsuarios();
+        }
+
         public async Task GuardarUsuario(Usuario user)
         {
             await _usuarioRepository.GuardarUsuario(user);

@@ -16,6 +16,34 @@ namespace BEBarberShop.Persistence.Repositories
             aplicationDbContext = context;
         }
 
+        public async Task<Usuario> BuscarUsuario(int user)
+        {
+            var usuario = await aplicationDbContext.Usuarios.Where(x => x.Activo == 1 && x.Id == user && x.Activo==1).FirstOrDefaultAsync();
+            return usuario;
+        }
+
+        public async Task EditarUsuario(Usuario user)
+        {
+
+            aplicationDbContext.Update(user);
+            await aplicationDbContext.SaveChangesAsync();
+            
+        }
+
+        public async Task EliminarUsuario(Usuario user)
+        {
+            user.Activo = 0;
+            aplicationDbContext.Entry(user).State = EntityState.Modified;
+            await aplicationDbContext.SaveChangesAsync();
+
+
+        }
+
+        public async Task<List<Usuario>> GetUsuarios()
+        {
+           return await aplicationDbContext.Usuarios.Where(x => x.Activo == 1).ToListAsync();
+        }
+
         public async Task GuardarUsuario(Usuario user)
         {
             aplicationDbContext.Add(user);

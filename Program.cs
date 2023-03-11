@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 
 /*CONEXION*/
 
-builder.Services.AddDbContext<AplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("Conexion")));
+builder.Services.AddDbContext<AplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("ConexionCasa")));
 
 
 

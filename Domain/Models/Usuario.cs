@@ -25,6 +25,8 @@ namespace BEBarberShop.Domain.Models
 
         public DateTime FechaCreacion { get; set; }
 
+        public int Activo { get; set; }
+
 
 
     }

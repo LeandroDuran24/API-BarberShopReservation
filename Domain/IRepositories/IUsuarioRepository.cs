@@ -9,5 +9,11 @@ namespace BEBarberShop.Domain.IRepositories
         Task GuardarUsuario(Usuario user);
 
         Task<List<Usuario>> GetUsuarios();
+
+        Task<Usuario> BuscarUsuario(int user);
+
+        Task EliminarUsuario(Usuario user);
+
+        Task EditarUsuario(Usuario user);
     }
 }

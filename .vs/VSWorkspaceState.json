@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Domain",
+    "\\Domain\\Models",
+    "\\Migrations"
   ],
+  "SelectedNode": "\\Migrations",
   "PreviewInSolutionExplorer": false
 }

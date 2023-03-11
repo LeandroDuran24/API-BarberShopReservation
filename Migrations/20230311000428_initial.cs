@@ -21,7 +21,8 @@ namespace BEBarberShop.Migrations
                     Apellidos = table.Column<string>(type: "varchar(50)", nullable: false),
                     NombreUsuario = table.Column<string>(type: "varchar(20)", nullable: false),
                     Password = table.Column<string>(type: "varchar(20)", nullable: false),
-                    FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Activo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
