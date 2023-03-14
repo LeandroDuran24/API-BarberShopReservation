@@ -52,6 +52,23 @@ namespace BEBarberShop.Controllers
             }
         }
 
+        [HttpGet("{idUsuario}")]
+        public async Task<IActionResult> GetUsuario(int idUsuario)
+        {
+            try
+            {
+                var usuario = await _usuarioRepository.BuscarUsuario(idUsuario);
+                return Ok(usuario);
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         [HttpDelete("{idUsuario}")]
         public async Task<IActionResult> Delete(int idUsuario)
         {
