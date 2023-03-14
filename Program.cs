@@ -23,11 +23,14 @@ builder.Services.AddDbContext<AplicationDbContext>(option => option.UseSqlServer
 
 /*SERVICIOS*/
 builder.Services.AddScoped<IUsuarioService,UsuarioService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
+
 
 
 
 /*REPOSITORY*/
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 /*CORS*/
 
