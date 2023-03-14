@@ -8,6 +8,11 @@ namespace BEBarberShop.Services
     {
         private readonly IClienteRepository _clienteRepository;
 
+        public async Task<List<Cliente>> GetClientes()
+        {
+            return await _clienteRepository.GetClientes();
+        }
+
         public async Task GuardarCliente(Cliente cliente)
         {
            await _clienteRepository.GuardarCliente(cliente);

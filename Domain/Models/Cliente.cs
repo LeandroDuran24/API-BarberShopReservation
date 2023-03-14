@@ -40,6 +40,8 @@ namespace BEBarberShop.Domain.Models
         public DateTime FechaNacimiento { get; set; }
         public DateTime FechaCreacion { get; set; }
 
+        public int Activo { get; set; }
+
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 
