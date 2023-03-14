@@ -1,13 +1,16 @@
-﻿using BEBarberShop.Domain.IServices;
+﻿using BEBarberShop.Domain.IRepositories;
+using BEBarberShop.Domain.IServices;
 using BEBarberShop.Domain.Models;
 
 namespace BEBarberShop.Services
 {
     public class ClienteService : IClienteService
     {
-        public Task GuardarCliente(Cliente cliente)
+        private readonly IClienteRepository _clienteRepository;
+
+        public async Task GuardarCliente(Cliente cliente)
         {
-            throw new NotImplementedException();
+           await _clienteRepository.GuardarCliente(cliente);
         }
     }
 }
