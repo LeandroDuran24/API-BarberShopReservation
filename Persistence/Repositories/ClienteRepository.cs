@@ -1,6 +1,8 @@
-﻿namespace BEBarberShop.Persistence.Repositories
+﻿using BEBarberShop.Domain.IRepositories;
+
+namespace BEBarberShop.Persistence.Repositories
 {
-    public class ClienteRepository
+    public class ClienteRepository :IClienteRepository
     {
     }
 }

@@ -2,9 +2,8 @@
 
 namespace BEBarberShop.Domain.IRepositories
 {
-    public class IClienteRepository
+    public interface IClienteRepositorye
     {
-
-        Task Cliente GuardarCliente(Cliente cliente);
+        Task GuardarCliente(Cliente cliente);
     }
 }
