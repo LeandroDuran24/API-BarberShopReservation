@@ -10,7 +10,7 @@ namespace BEBarberShop.Services
 
         public async Task<Cliente> BuscarCliente(int cliente)
         {
-            await _clienteRepository.BuscarCliente(cliente);
+           return await _clienteRepository.BuscarCliente(cliente);
         }
 
         public async Task EditarCliente(Cliente cliente)

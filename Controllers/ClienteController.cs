@@ -18,7 +18,7 @@ namespace BEBarberShop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Cliente cliente)
+        public async Task<IActionResult> Post([FromBody] Cliente cliente)
         {
             try
             {
@@ -77,21 +77,21 @@ namespace BEBarberShop.Controllers
         }
 
 
-        [HttpDelete("{idUsuario}")]
-        public async Task<IActionResult> Delete(int idUsuario)
+        [HttpDelete("{idCliente}")]
+        public async Task<IActionResult> Delete(int idCliente)
         {
             try
             {
-                var usuario = await _usuarioRepository.BuscarUsuario(idUsuario);
+                var cliente = await _clienteRepository.BuscarCliente(idCliente);
 
-                if (usuario != null)
+                if (cliente != null)
                 {
-                    await _usuarioRepository.EliminarUsuario(usuario);
-                    return Ok(new { message = "Se ha eliminado el usuario" });
+                    await _clienteRepository.EliminarCliente(cliente);
+                    return Ok(new { message = "Se ha eliminado el cliente" });
                 }
                 else
                 {
-                    return BadRequest(new { message = "No se ha encontrado el usuario" });
+                    return BadRequest(new { message = "No se ha encontrado el cliente" });
                 }
             }
             catch (Exception ex)
@@ -111,12 +111,12 @@ namespace BEBarberShop.Controllers
                 client.Nombre = cliente.Nombre;
                 client.Apellidos = cliente.Apellidos;
                 client.Celular = cliente.Celular;
-                client.Direccion= cliente.Direccion;
-                client.Sexo= cliente.Sexo;
+                client.Direccion = cliente.Direccion;
+                client.Sexo = cliente.Sexo;
                 client.FechaNacimiento = cliente.FechaNacimiento;
                 client.Provincia = cliente.Provincia;
                 cliente.Identificacion = cliente.Identificacion;
-                client.TipoIdentificacion= cliente.TipoIdentificacion;
+                client.TipoIdentificacion = cliente.TipoIdentificacion;
 
                 await _clienteRepository.EditarCliente(cliente);
 
@@ -128,4 +128,5 @@ namespace BEBarberShop.Controllers
                 return BadRequest(ex.Message);
             }
         }
+    }
 }

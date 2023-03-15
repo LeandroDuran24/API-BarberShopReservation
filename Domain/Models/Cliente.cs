@@ -39,6 +39,10 @@ namespace BEBarberShop.Domain.Models
         public string Celular { get; set; }
 
 
+
+        [Column(TypeName = "varchar(40)")]
+        public string Email { get; set; }
+
         public DateTime FechaNacimiento { get; set; }
         public DateTime FechaCreacion { get; set; }
 

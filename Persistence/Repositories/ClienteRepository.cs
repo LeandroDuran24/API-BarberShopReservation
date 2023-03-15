@@ -9,6 +9,11 @@ namespace BEBarberShop.Persistence.Repositories
     {
         private readonly AplicationDbContext aplicationDbContext;
 
+        public ClienteRepository(AplicationDbContext aplicationDbContext)
+        {
+            this.aplicationDbContext = aplicationDbContext;
+        }
+
         public async Task<Cliente> BuscarCliente(int cliente)
         {
             var clienteSearch = await aplicationDbContext.Clientes.Where(x=> x.Id==cliente && x.Activo==1).FirstOrDefaultAsync();
