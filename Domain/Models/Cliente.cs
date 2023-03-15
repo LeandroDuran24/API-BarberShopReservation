@@ -22,6 +22,8 @@ namespace BEBarberShop.Domain.Models
         [Column(TypeName = "varchar(20)")]
         public string Identificacion { get; set; }
 
+        [Column(TypeName = "varchar(20)")]
+        public string Sexo { get; set; }
 
 
         [Column(TypeName = "varchar(100)")]
@@ -43,7 +45,6 @@ namespace BEBarberShop.Domain.Models
         public int Activo { get; set; }
 
         public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
 
     }
 }

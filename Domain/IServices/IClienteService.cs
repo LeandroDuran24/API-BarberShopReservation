@@ -6,5 +6,12 @@ namespace BEBarberShop.Domain.IServices
     {
         Task GuardarCliente(Cliente cliente);
         Task<List<Cliente>> GetClientes();
+
+        Task<Cliente> BuscarCliente(int cliente);
+
+        Task EliminarCliente(Cliente cliente);
+
+        Task EditarCliente(Cliente cliente);
+
     }
 }

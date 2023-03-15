@@ -58,5 +58,74 @@ namespace BEBarberShop.Controllers
                 return BadRequest(ex.Message);
             }
         }
-    }
+
+
+        [HttpGet("{idCliente}")]
+        public async Task<IActionResult> GetCliente(int idCliente)
+        {
+            try
+            {
+                var cliente = await _clienteRepository.BuscarCliente(idCliente);
+                return Ok(cliente);
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpDelete("{idUsuario}")]
+        public async Task<IActionResult> Delete(int idUsuario)
+        {
+            try
+            {
+                var usuario = await _usuarioRepository.BuscarUsuario(idUsuario);
+
+                if (usuario != null)
+                {
+                    await _usuarioRepository.EliminarUsuario(usuario);
+                    return Ok(new { message = "Se ha eliminado el usuario" });
+                }
+                else
+                {
+                    return BadRequest(new { message = "No se ha encontrado el usuario" });
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] Cliente cliente)
+        {
+            try
+            {
+
+                var client = await _clienteRepository.BuscarCliente(cliente.Id);
+                client.Nombre = cliente.Nombre;
+                client.Apellidos = cliente.Apellidos;
+                client.Celular = cliente.Celular;
+                client.Direccion= cliente.Direccion;
+                client.Sexo= cliente.Sexo;
+                client.FechaNacimiento = cliente.FechaNacimiento;
+                client.Provincia = cliente.Provincia;
+                cliente.Identificacion = cliente.Identificacion;
+                client.TipoIdentificacion= cliente.TipoIdentificacion;
+
+                await _clienteRepository.EditarCliente(cliente);
+
+                return Ok(new { message = "El cliente fue editado" });
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
 }
