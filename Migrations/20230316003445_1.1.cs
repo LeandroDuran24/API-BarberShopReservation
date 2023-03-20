@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BEBarberShop.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class _11 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -8,7 +8,10 @@ namespace BEBarberShop.Persistence.Context
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        
+        public DbSet<Estilista> Estilistas { get; set; }
 
+        public DbSet<Servicio> Servicios { get; set; }
 
         public AplicationDbContext(DbContextOptions<AplicationDbContext>options):base(options) 
         {

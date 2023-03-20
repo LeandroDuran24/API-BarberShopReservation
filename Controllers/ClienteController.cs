@@ -107,6 +107,7 @@ namespace BEBarberShop.Controllers
             try
             {
 
+                
                 var client = await _clienteRepository.BuscarCliente(cliente.Id);
                 client.Nombre = cliente.Nombre;
                 client.Apellidos = cliente.Apellidos;
@@ -115,10 +116,10 @@ namespace BEBarberShop.Controllers
                 client.Sexo = cliente.Sexo;
                 client.FechaNacimiento = cliente.FechaNacimiento;
                 client.Provincia = cliente.Provincia;
-                cliente.Identificacion = cliente.Identificacion;
+                client.Identificacion = cliente.Identificacion;
                 client.TipoIdentificacion = cliente.TipoIdentificacion;
 
-                await _clienteRepository.EditarCliente(cliente);
+                await _clienteRepository.EditarCliente(client);
 
                 return Ok(new { message = "El cliente fue editado" });
             }

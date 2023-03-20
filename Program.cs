@@ -17,20 +17,23 @@ builder.Services.AddSwaggerGen();
 
 /*CONEXION*/
 
-builder.Services.AddDbContext<AplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("Conexion")));
+builder.Services.AddDbContext<AplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("ConexionCasa")));
 
 
 
 /*SERVICIOS*/
 builder.Services.AddScoped<IUsuarioService,UsuarioService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
-
+builder.Services.AddScoped<IEstilistaService, EstilistaService>();
+builder.Services.AddScoped<IServicioService, ServicioService>();
 
 
 
 /*REPOSITORY*/
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IEstilistaRepository, EstilistaRepository>();
+builder.Services.AddScoped<IServicioRepository, ServicioRepository>();
 
 /*CORS*/
 
