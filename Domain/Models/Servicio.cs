@@ -10,8 +10,7 @@ namespace BEBarberShop.Domain.Models
         [Column(TypeName = "varchar(50)")]
         public string Nombre { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
-        public DateTime Duracion { get; set; }
+        public string Duracion { get; set; }
 
         [Column(TypeName = "varchar(50)")]
         public float Precio { get; set; }
