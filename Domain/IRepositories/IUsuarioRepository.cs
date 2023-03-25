@@ -19,5 +19,6 @@ namespace BEBarberShop.Domain.IRepositories
         Task CambiarPassword(Usuario user);
 
         Task<bool> ValidateExistence(Usuario usuario);
+        Task<Usuario> ValidatePassword(int idUsuario, string passwordAnterior);
     }
 }

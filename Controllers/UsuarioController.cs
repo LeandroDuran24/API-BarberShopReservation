@@ -1,8 +1,10 @@
 ﻿using BEBarberShop.Domain.IRepositories;
 using BEBarberShop.Domain.Models;
+using BEBarberShop.DTO;
 using BEBarberShop.Utilidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BEBarberShop.Controllers
 {
@@ -127,25 +129,26 @@ namespace BEBarberShop.Controllers
 
         [HttpPut]
         [Route("CambiarPassword")]
-        public async Task<IActionResult> CambiarPassword([FromBody] Usuario user)
+        public async Task<IActionResult> CambiarPassword([FromBody] CambiarPasswordDTO user)
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                int idUsuario = JwtConfiguration.GetTokenIdUsuario(identity);
+                string passwordEncriptada = Encriptar.EncriptarPassword(user.passwordAnterior);
+                var usuario = await _usuarioRepository.ValidatePassword(idUsuario, passwordEncriptada);
 
-                var usuario = await _usuarioRepository.BuscarUsuario(user.Id);
 
-                if(usuario.Password != user.Password)
+                if (usuario == null)
                 {
-                    return BadRequest(new { message = "Favor validar la contraseña actual" });
+                    return BadRequest(new { message = "Password incorrecta" });
                 }
                 else
                 {
-                    usuario.Password = user.Password;
-                    await _usuarioRepository.EditarUsuario(usuario);
-                    return Ok(new { message = "Se ha cambiado la contraseña" });
-
-                }
- 
+                    usuario.Password = Encriptar.EncriptarPassword(user.nuevaPassword);
+                    await _usuarioRepository.CambiarPassword(usuario);
+                    return Ok(new { message = "La Password fue actualizada con exito..." });
+                } 
 
 
             }

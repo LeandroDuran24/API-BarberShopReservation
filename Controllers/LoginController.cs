@@ -1,6 +1,8 @@
 ﻿using BEBarberShop.Domain.IServices;
 using BEBarberShop.Domain.Models;
 using BEBarberShop.Utilidades;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +25,7 @@ namespace BEBarberShop.Controllers
         //LOGIN
 
         [HttpPost]
+       // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Post([FromBody] Usuario user)
         {
 
@@ -33,7 +36,7 @@ namespace BEBarberShop.Controllers
                 string tokenString = JwtConfiguration.GetToken(usuario, _configuration);
 
 
-                return Ok(usuario);
+                return Ok(new { token = tokenString });
              
             }
             catch (Exception ex)
