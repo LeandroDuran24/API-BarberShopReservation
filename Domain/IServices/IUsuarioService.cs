@@ -15,5 +15,7 @@ namespace BEBarberShop.Domain.IServices
         Task EliminarUsuario(Usuario user);
 
         Task EditarUsuario(Usuario user);
+
+        Task CambiarPassword(Usuario user);
     }
 }

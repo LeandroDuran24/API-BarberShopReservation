@@ -1,6 +1,9 @@
-﻿namespace BEBarberShop.Domain.IRepositories
+﻿using BEBarberShop.Domain.Models;
+
+namespace BEBarberShop.Domain.IRepositories
 {
     public interface IReservacionRepository
     {
+        Task GuardarReservacion(Reservacion reserva);
     }
 }

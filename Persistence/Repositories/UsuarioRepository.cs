@@ -22,6 +22,12 @@ namespace BEBarberShop.Persistence.Repositories
             return usuario;
         }
 
+        public async Task CambiarPassword(Usuario user)
+        {
+            aplicationDbContext.Update(user);
+            await aplicationDbContext.SaveChangesAsync();
+        }
+
         public async Task EditarUsuario(Usuario user)
         {
 

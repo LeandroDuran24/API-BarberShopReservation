@@ -114,5 +114,35 @@ namespace BEBarberShop.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut]
+        [Route("CambiarPassword")]
+        public async Task<IActionResult> CambiarPassword([FromBody] Usuario user)
+        {
+            try
+            {
+
+                var usuario = await _usuarioRepository.BuscarUsuario(user.Id);
+
+                if(usuario.Password != user.Password)
+                {
+                    return BadRequest(new { message = "Favor validar la contraseña actual" });
+                }
+                else
+                {
+                    usuario.Password = user.Password;
+                    await _usuarioRepository.EditarUsuario(usuario);
+                    return Ok(new { message = "Se ha cambiado la contraseña" });
+
+                }
+ 
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

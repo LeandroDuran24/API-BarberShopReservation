@@ -18,6 +18,11 @@ namespace BEBarberShop.Services
             return await _usuarioRepository.BuscarUsuario(user);
         }
 
+        public async Task CambiarPassword(Usuario user)
+        {
+           await _usuarioRepository.CambiarPassword(user);
+        }
+
         public async Task EditarUsuario(Usuario user)
         {
             await _usuarioRepository.EditarUsuario(user);

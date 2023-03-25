@@ -15,5 +15,7 @@ namespace BEBarberShop.Domain.IRepositories
         Task EliminarUsuario(Usuario user);
 
         Task EditarUsuario(Usuario user);
+
+        Task CambiarPassword(Usuario user);
     }
 }
