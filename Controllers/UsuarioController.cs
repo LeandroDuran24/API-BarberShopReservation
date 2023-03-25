@@ -2,6 +2,8 @@
 using BEBarberShop.Domain.Models;
 using BEBarberShop.DTO;
 using BEBarberShop.Utilidades;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -129,6 +131,7 @@ namespace BEBarberShop.Controllers
 
         [HttpPut]
         [Route("CambiarPassword")]
+       // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CambiarPassword([FromBody] CambiarPasswordDTO user)
         {
             try
