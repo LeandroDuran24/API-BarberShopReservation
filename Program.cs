@@ -3,7 +3,10 @@ using BEBarberShop.Domain.IServices;
 using BEBarberShop.Persistence.Context;
 using BEBarberShop.Persistence.Repositories;
 using BEBarberShop.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +46,20 @@ builder.Services.AddScoped<IReservacionRepository, ReservacionRepository>();
 builder.Services.AddCors(options => options.AddPolicy("AllowWebApp", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
 
+/*Add Authentication*/
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
+{
+
+    ValidateIssuer = true,
+    ValidateAudience = true,
+    ValidateLifetime = true,
+    ValidateIssuerSigningKey = true,
+    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+    ValidAudience = builder.Configuration["Jwt:Audience"],
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"])),
+    ClockSkew = TimeSpan.Zero
+});
+
 
 
 
@@ -57,6 +74,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseCors("AllowWebApp");//CORS
+app.UseAuthentication();//Authentication
 
 app.UseHttpsRedirection();
 

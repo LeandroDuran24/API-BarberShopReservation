@@ -20,7 +20,7 @@ namespace BEBarberShop.Domain.Models
         public string NombreUsuario { get; set; }
 
 
-        [Column(TypeName = "varchar(20)")]
+        [Column(TypeName = "varchar(100)")]
         public string Password { get; set; }
 
         public DateTime FechaCreacion { get; set; }

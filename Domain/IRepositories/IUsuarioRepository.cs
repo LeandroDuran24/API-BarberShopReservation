@@ -17,5 +17,7 @@ namespace BEBarberShop.Domain.IRepositories
         Task EditarUsuario(Usuario user);
 
         Task CambiarPassword(Usuario user);
+
+        Task<bool> ValidateExistence(Usuario usuario);
     }
 }

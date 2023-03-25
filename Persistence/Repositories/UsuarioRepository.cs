@@ -78,5 +78,11 @@ namespace BEBarberShop.Persistence.Repositories
             }
 
         }
+
+        public async Task<bool> ValidateExistence(Usuario usuario)
+        {
+            var validateExistence = await aplicationDbContext.Usuarios.AnyAsync(x => x.NombreUsuario == usuario.NombreUsuario);
+            return validateExistence;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BEBarberShop.Domain.IRepositories;
 using BEBarberShop.Domain.Models;
+using BEBarberShop.Utilidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,8 +23,17 @@ namespace BEBarberShop.Controllers
         {
             try
             {
+
+                var validateExistence = await _usuarioRepository.ValidateExistence(user);
+
+                if (validateExistence)
+                {
+                    return BadRequest(new { message = "El usuario " + user.NombreUsuario + " ya existe" });
+                }
+
                 user.Activo = 1;
                 user.FechaCreacion = DateTime.Now;
+                user.Password = Encriptar.EncriptarPassword(user.Password);
                 await _usuarioRepository.GuardarUsuario(user);
                 return Ok(new { Message = "Usuario Registrado con Exito !" });
 

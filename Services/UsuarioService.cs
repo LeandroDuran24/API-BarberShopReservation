@@ -48,5 +48,11 @@ namespace BEBarberShop.Services
 
           return await _usuarioRepository.IniciarSesion(user);
         }
+
+        public async Task<bool> ValidateExistence(Usuario usuario)
+        {
+            return await _usuarioRepository.ValidateExistence(usuario);
+
+        }
     }
 }

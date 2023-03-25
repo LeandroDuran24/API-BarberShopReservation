@@ -17,5 +17,6 @@ namespace BEBarberShop.Domain.IServices
         Task EditarUsuario(Usuario user);
 
         Task CambiarPassword(Usuario user);
+        Task<bool> ValidateExistence(Usuario usuario);
     }
 }

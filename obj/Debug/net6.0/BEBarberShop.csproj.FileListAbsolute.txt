@@ -336,3 +336,9 @@ C:\Users\leand\source\repos\API-BarberShopReservation\obj\Debug\net6.0\refint\BE
 C:\Users\leand\source\repos\API-BarberShopReservation\obj\Debug\net6.0\BEBarberShop.pdb
 C:\Users\leand\source\repos\API-BarberShopReservation\obj\Debug\net6.0\BEBarberShop.genruntimeconfig.cache
 C:\Users\leand\source\repos\API-BarberShopReservation\obj\Debug\net6.0\ref\BEBarberShop.dll
+C:\Users\leand\source\repos\API-BarberShopReservation\bin\Debug\net6.0\JWT.dll
+C:\Users\leand\source\repos\API-BarberShopReservation\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\leand\source\repos\API-BarberShopReservation\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\leand\source\repos\API-BarberShopReservation\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\leand\source\repos\API-BarberShopReservation\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\leand\source\repos\API-BarberShopReservation\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

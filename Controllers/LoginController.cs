@@ -1,5 +1,6 @@
 ﻿using BEBarberShop.Domain.IServices;
 using BEBarberShop.Domain.Models;
+using BEBarberShop.Utilidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +11,12 @@ namespace BEBarberShop.Controllers
     public class LoginController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
+        private readonly IConfiguration _configuration;
 
-        public LoginController(IUsuarioService usuarioService)
+        public LoginController(IUsuarioService usuarioService, IConfiguration configuration)
         {
             this._usuarioService = usuarioService;
+            _configuration = configuration;
         }
 
 
@@ -25,7 +28,10 @@ namespace BEBarberShop.Controllers
 
             try
             {
+                user.Password = Encriptar.EncriptarPassword(user.Password);
                var usuario = await _usuarioService.IniciarSesion(user);
+                string tokenString = JwtConfiguration.GetToken(usuario, _configuration);
+
 
                 return Ok(usuario);
              
