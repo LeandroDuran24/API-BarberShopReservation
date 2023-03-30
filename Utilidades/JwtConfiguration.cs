@@ -28,7 +28,7 @@ namespace BEBarberShop.Utilidades
                 issuer: issuer,
                 audience: audience,
                 claims,
-                expires: DateTime.Now.AddHours(2),
+                expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: credentials
 
                 );

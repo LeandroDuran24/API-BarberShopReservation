@@ -1,6 +1,7 @@
 ﻿using BEBarberShop.Domain.IRepositories;
 using BEBarberShop.Domain.Models;
 using BEBarberShop.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace BEBarberShop.Persistence.Repositories
 {
@@ -8,16 +9,26 @@ namespace BEBarberShop.Persistence.Repositories
     {
         private readonly AplicationDbContext _aplicationDbContext;
 
-        public ReservacionRepository(AplicationDbContext aplicationDbContext   )
+        public ReservacionRepository(AplicationDbContext aplicationDbContext)
         {
-            _aplicationDbContext = aplicationDbContext;
+           _aplicationDbContext = aplicationDbContext;
 
         }
 
         public async Task GuardarReservacion(Reservacion reserva)
         {
-            _aplicationDbContext.Add(reserva);
-           await _aplicationDbContext.SaveChangesAsync();
+            try
+            {
+               _aplicationDbContext.Add(reserva);
+                await _aplicationDbContext.SaveChangesAsync();
+              
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

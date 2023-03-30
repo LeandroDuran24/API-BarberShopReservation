@@ -23,7 +23,13 @@ namespace BEBarberShop.Controllers
             try
             {
 
-                reservacionRepository.GuardarReservacion(reserva);
+                reserva.Activo = 1;
+                reserva.FechaCreacion = DateTime.Now;
+                reserva.UsuarioId = 1;
+                reserva.ListReservacionDetalle[0].Id = 0;
+
+
+                await reservacionRepository.GuardarReservacion(reserva);
                 return Ok(new { message = "Se ha registrado la reserva" });
             }
             catch (Exception ex)

@@ -144,6 +144,70 @@ namespace BEBarberShop.Migrations
                     b.ToTable("Estilistas");
                 });
 
+            modelBuilder.Entity("BEBarberShop.Domain.Models.Reservacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Activo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EstilistaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Hora")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("EstilistaId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Reservacion");
+                });
+
+            modelBuilder.Entity("BEBarberShop.Domain.Models.ReservacionDetalle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ReservacionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServicioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservacionId");
+
+                    b.HasIndex("ServicioId");
+
+                    b.ToTable("ReservacionDetalle");
+                });
+
             modelBuilder.Entity("BEBarberShop.Domain.Models.Servicio", b =>
                 {
                     b.Property<int>("Id")
@@ -157,7 +221,7 @@ namespace BEBarberShop.Migrations
 
                     b.Property<string>("Duracion")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
@@ -206,11 +270,62 @@ namespace BEBarberShop.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("BEBarberShop.Domain.Models.Reservacion", b =>
+                {
+                    b.HasOne("BEBarberShop.Domain.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BEBarberShop.Domain.Models.Estilista", "Estilista")
+                        .WithMany()
+                        .HasForeignKey("EstilistaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BEBarberShop.Domain.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Estilista");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("BEBarberShop.Domain.Models.ReservacionDetalle", b =>
+                {
+                    b.HasOne("BEBarberShop.Domain.Models.Reservacion", "Reservacion")
+                        .WithMany("ListReservacionDetalle")
+                        .HasForeignKey("ReservacionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("BEBarberShop.Domain.Models.Servicio", "Servicio")
+                        .WithMany()
+                        .HasForeignKey("ServicioId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Reservacion");
+
+                    b.Navigation("Servicio");
+                });
+
+            modelBuilder.Entity("BEBarberShop.Domain.Models.Reservacion", b =>
+                {
+                    b.Navigation("ListReservacionDetalle");
                 });
 #pragma warning restore 612, 618
         }

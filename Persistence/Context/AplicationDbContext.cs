@@ -13,9 +13,17 @@ namespace BEBarberShop.Persistence.Context
 
         public DbSet<Servicio> Servicios { get; set; }
 
+        public DbSet<Reservacion> Reservacion { get; set; }
+
+        public DbSet<ReservacionDetalle> ReservacionDetalle { get; set; }
+
+
+
         public AplicationDbContext(DbContextOptions<AplicationDbContext>options):base(options) 
         {
 
         }
+
+
     }
 }
