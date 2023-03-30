@@ -1,5 +1,6 @@
 ﻿using BEBarberShop.Domain.IRepositories;
 using BEBarberShop.Domain.Models;
+using BEBarberShop.Persistence.Repositories;
 using BEBarberShop.Utilidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,21 @@ namespace BEBarberShop.Controllers
 
                 await reservacionRepository.GuardarReservacion(reserva);
                 return Ok(new { message = "Se ha registrado la reserva" });
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var listReservaciones = await reservacionRepository.GetListReservaciones();
+                return Ok(listReservaciones);
             }
             catch (Exception ex)
             {
