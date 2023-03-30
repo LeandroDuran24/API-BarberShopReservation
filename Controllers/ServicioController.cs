@@ -1,7 +1,9 @@
 ﻿using BEBarberShop.Domain.IRepositories;
 using BEBarberShop.Domain.Models;
+using BEBarberShop.Utilidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BEBarberShop.Controllers
 {
@@ -52,6 +54,10 @@ namespace BEBarberShop.Controllers
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                int idUsuario = JwtConfiguration.GetTokenIdUsuario(identity);
+
+                service.UsuarioId = idUsuario;
                 service.Activo = 1;
                 service.FechaCreacion = DateTime.Now;
                 await _servicioRepository.GuardarServicio(service);
