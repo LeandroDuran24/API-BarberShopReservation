@@ -6,5 +6,7 @@ namespace BEBarberShop.Domain.IServices
     {
         Task GuardarReservacion(Reservacion reserva);
         Task<List<Reservacion>> GetListReservaciones();
+
+        Task<List<Servicio>> GetListServiciosReservaciones(int idReserva);
     }
 }

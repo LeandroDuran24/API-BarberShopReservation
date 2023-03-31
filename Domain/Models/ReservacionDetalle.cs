@@ -10,7 +10,7 @@ namespace BEBarberShop.Domain.Models
 
         [ForeignKey("ReservacionId")]
         public int ReservacionId { get; set; }
-       // public Reservacion? Reservacion { get; set; }
+        public Reservacion? Reservacion { get; set; }
         [ForeignKey("ServicioId")]
         public int ServicioId { get; set; }
         public Servicio? Servicio { get; set; }

@@ -26,6 +26,12 @@ namespace BEBarberShop.Persistence.Repositories
             return listReservaciones;
         }
 
+        public async Task<List<Servicio>> GetListServiciosReservaciones(int idReserva)
+        {
+            var listServicios = await _aplicationDbContext.ReservacionDetalle.Where(x=> x.ReservacionId==idReserva).Select(x=> new Servicio { Id=x.Servicio.Id,Nombre=x.Servicio.Nombre,Precio=x.Servicio.Precio}).ToListAsync();
+            return listServicios;
+        }
+
         public async Task GuardarReservacion(Reservacion reserva)
         {
             try

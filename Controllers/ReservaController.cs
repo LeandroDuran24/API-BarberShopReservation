@@ -57,5 +57,22 @@ namespace BEBarberShop.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpGet("{idReserva}")]
+        [Route("ListServicios")]
+        public async Task<IActionResult> GetServicios(int idReserva)
+        {
+            try
+            {
+                var listReservacionesServicios = await reservacionRepository.GetListServiciosReservaciones(idReserva);
+                return Ok(listReservacionesServicios);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
