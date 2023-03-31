@@ -59,8 +59,9 @@ namespace BEBarberShop.Controllers
         }
 
 
-        [HttpGet("{idReserva}")]
-        [Route("ListServicios")]
+        [HttpGet]
+        [Route("GetServicios/{idReserva}")]
+
         public async Task<IActionResult> GetServicios(int idReserva)
         {
             try
