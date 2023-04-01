@@ -67,6 +67,13 @@ namespace BEBarberShop.Persistence.Repositories
             return listServicios;
         }
 
+        public async Task<Reservacion> GetReservacion(int idReserva)
+        {
+           var reservacion = await _aplicationDbContext.Reservacion.Where(x => x.Activo == 1 && x.Id == idReserva).FirstOrDefaultAsync();
+
+            return reservacion;
+        }
+
         public async Task GuardarReservacion(Reservacion reserva)
         {
             try

@@ -75,5 +75,56 @@ namespace BEBarberShop.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody]Reservacion reserva)
+        {
+            try
+            {
+                var reservacion = await reservacionRepository.GetReservacion(reserva.Id);
+                reservacion.Hora = reserva.Hora;
+                reservacion.Fecha = reserva.Fecha;
+                reservacion.ClienteId = reserva.ClienteId;
+                reservacion.EstilistaId = reserva.EstilistaId;
+                reservacion.ListReservacionDetalle = reserva.ListReservacionDetalle;
+                await reservacionRepository.EditarReservacion(reservacion);
+                return Ok(new { message = "La Reservacion fue editada" });
+               
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
+             
+        }
+        [HttpDelete("{idReserva}")]
+        public async Task<IActionResult> Delete(int idReserva)
+        {
+            try
+            {
+
+                var reserva = await reservacionRepository.GetReservacion(idReserva);
+
+                if (reserva != null)
+                {
+
+                    await reservacionRepository.EliminarReservacion(reserva);
+                    return Ok(new { message = "Se ha eliminado la Reservacion" });
+                }
+                else
+                {
+                    return BadRequest(new { message = "No se ha encontrado el servicio" });
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
