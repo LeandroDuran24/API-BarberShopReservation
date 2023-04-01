@@ -17,18 +17,40 @@ namespace BEBarberShop.Persistence.Repositories
 
         public async Task<List<Reservacion>> GetListReservaciones()
         {
-            var listReservaciones = await _aplicationDbContext.Reservacion.Where(x => x.Activo == 1)
-                .Select(x => new Reservacion { Id = x.Id, Hora = x.Hora, Fecha = x.Fecha, 
+            var listReservaciones = await _aplicationDbContext.Reservacion.Where(x => x.Activo == 1).Include(x => x.ListReservacionDetalle)
+                .Select(x => new Reservacion
+                {
+                    Id = x.Id,
+                    Hora = x.Hora,
+                    Fecha = x.Fecha,
                     Usuario = new Usuario { NombreUsuario = x.Usuario.NombreUsuario },
                     Estilista = new Estilista { Nombre = x.Estilista.Nombre, Apellidos = x.Estilista.Apellidos },
-                    Cliente = new Cliente { Nombre = x.Cliente.Nombre, Apellidos = x.Cliente.Apellidos } }).ToListAsync();
+                    Cliente = new Cliente { Nombre = x.Cliente.Nombre, Apellidos = x.Cliente.Apellidos }
+
+                }).ToListAsync();
 
             return listReservaciones;
         }
 
-        public async Task<List<Servicio>> GetListServiciosReservaciones(int idReserva)
+        public async Task<List<ReservacionDetalle>> GetListServiciosReservaciones(int idReserva)
         {
-            var listServicios = await _aplicationDbContext.ReservacionDetalle.Where(x=> x.ReservacionId==idReserva).Select(x=> new Servicio { Id=x.Servicio.Id,Nombre=x.Servicio.Nombre,Precio=x.Servicio.Precio}).ToListAsync();
+            //var listServicios = await _aplicationDbContext.ReservacionDetalle.Where(x => x.ReservacionId == idReserva).Select(x => new Servicio { Id = x.Servicio.Id, Nombre = x.Servicio.Nombre, Precio = x.Servicio.Precio }).ToListAsync();
+            var listServicios = await _aplicationDbContext.ReservacionDetalle.Where(x=>x.ReservacionId==idReserva).Select(x => new ReservacionDetalle
+            {
+                ReservacionId = x.ReservacionId,
+                Servicio = new Servicio { Nombre = x.Servicio.Nombre },
+                Reservacion = new Reservacion
+                {
+                   
+                    Activo=1,
+                    Hora = x.Reservacion.Hora,
+                    Fecha = x.Reservacion.Fecha,
+                    Usuario = new Usuario { NombreUsuario = x.Reservacion.Usuario.NombreUsuario },
+                    Estilista = new Estilista { Nombre = x.Reservacion.Estilista.Nombre, Apellidos = x.Reservacion.Estilista.Apellidos },
+                    Cliente = new Cliente { Nombre = x.Reservacion.Cliente.Nombre, Apellidos = x.Reservacion.Cliente.Apellidos }
+                }
+            }).ToListAsync();
+
             return listServicios;
         }
 

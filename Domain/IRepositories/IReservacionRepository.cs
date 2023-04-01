@@ -8,6 +8,6 @@ namespace BEBarberShop.Domain.IRepositories
 
         Task<List<Reservacion>> GetListReservaciones();
 
-        Task<List<Servicio>> GetListServiciosReservaciones( int idReserva);
+        Task<List<ReservacionDetalle>> GetListServiciosReservaciones(int idReserva );
     }
 }

@@ -60,7 +60,7 @@ namespace BEBarberShop.Controllers
 
 
         [HttpGet]
-        [Route("GetServicios/{idReserva}")]
+        [Route("GetReservacionServicios/{idReserva}")]
 
         public async Task<IActionResult> GetServicios(int idReserva)
         {
