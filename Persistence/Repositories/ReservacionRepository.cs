@@ -15,6 +15,19 @@ namespace BEBarberShop.Persistence.Repositories
 
         }
 
+        public async Task EditarReservacion(Reservacion reserva)
+        {
+            _aplicationDbContext.Update(reserva);
+            await _aplicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task EliminarReservacion(Reservacion reserva)
+        {
+            reserva.Activo = 0;
+            _aplicationDbContext.Entry(reserva).State = EntityState.Modified;
+            await _aplicationDbContext.SaveChangesAsync();
+        }
+
         public async Task<List<Reservacion>> GetListReservaciones()
         {
             var listReservaciones = await _aplicationDbContext.Reservacion.Where(x => x.Activo == 1).Include(x => x.ListReservacionDetalle)

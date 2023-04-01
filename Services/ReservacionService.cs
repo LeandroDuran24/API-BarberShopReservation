@@ -9,6 +9,16 @@ namespace BEBarberShop.Services
 
         private readonly IReservacionRepository reservacionRepository;
 
+        public async Task EditarReservacion(Reservacion reserva)
+        {
+            await reservacionRepository.EditarReservacion(reserva);
+        }
+
+        public async Task EliminarReservacion(Reservacion reserva)
+        {
+            await reservacionRepository.EditarReservacion(reserva);
+        }
+
         public async Task<List<Reservacion>> GetListReservaciones()
         {
 

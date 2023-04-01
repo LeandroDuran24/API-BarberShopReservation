@@ -8,5 +8,10 @@ namespace BEBarberShop.Domain.IServices
         Task<List<Reservacion>> GetListReservaciones();
 
         Task<List<ReservacionDetalle>> GetListServiciosReservaciones( int idReserva);
+
+
+        Task EliminarReservacion(Reservacion reserva);
+        Task EditarReservacion(Reservacion reserva);
     }
+
 }
