@@ -13,10 +13,12 @@ namespace BEBarberShop.Controllers
     public class ReservaController : ControllerBase
     {
         private readonly IReservacionRepository reservacionRepository;
+        private readonly ICalendarioReservacionRepository calendarioReservacionRepository;
 
-        public ReservaController(IReservacionRepository reservacionRepository)
+        public ReservaController(IReservacionRepository reservacionRepository,ICalendarioReservacionRepository calendarioReservacionRepository)
         {
                 this.reservacionRepository = reservacionRepository;
+            this.calendarioReservacionRepository = calendarioReservacionRepository;
         }
 
 
@@ -25,6 +27,7 @@ namespace BEBarberShop.Controllers
         {
             try
             {
+                CalendarioReservaciones calendario = new CalendarioReservaciones();
                 var identity = HttpContext.User.Identity as ClaimsIdentity;
                 int idUsuario = JwtConfiguration.GetTokenIdUsuario(identity);
 
@@ -32,8 +35,17 @@ namespace BEBarberShop.Controllers
                 reserva.FechaCreacion = DateTime.Now;
                 reserva.UsuarioId = idUsuario;
 
-
+                //Guardo la reserva con el detalle
                 await reservacionRepository.GuardarReservacion(reserva);
+
+                //Guardo la reserva en la tabla calendario
+                calendario.ReservacionId = reserva.Id;
+                calendario.FechaReserva = reserva.Fecha;
+                calendario.HoraInicio = reserva.Hora;
+                calendario.HoraFinal = reserva.Hora;
+                await calendarioReservacionRepository.GuardarCalendarioReservacion(calendario);
+
+
                 return Ok(new { message = "Se ha registrado la reserva" });
             }
             catch (Exception ex)
@@ -116,7 +128,7 @@ namespace BEBarberShop.Controllers
                 }
                 else
                 {
-                    return BadRequest(new { message = "No se ha encontrado el servicio" });
+                    return BadRequest(new { message = "No se ha encontrado la reservacion" });
                 }
 
             }

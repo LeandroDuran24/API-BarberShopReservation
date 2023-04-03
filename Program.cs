@@ -30,6 +30,7 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IEstilistaService, EstilistaService>();
 builder.Services.AddScoped<IServicioService, ServicioService>();
 builder.Services.AddScoped<IReservacionService, ReservacionService>();
+builder.Services.AddScoped<ICalendarioReservacionService, CalendarioReservacionService>();
 
 
 
@@ -39,6 +40,7 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IEstilistaRepository, EstilistaRepository>();
 builder.Services.AddScoped<IServicioRepository, ServicioRepository>();
 builder.Services.AddScoped<IReservacionRepository, ReservacionRepository>();
+builder.Services.AddScoped<ICalendarioReservacionRepository, CalendarioReservacionRepository>();
 
 
 /*CORS*/
