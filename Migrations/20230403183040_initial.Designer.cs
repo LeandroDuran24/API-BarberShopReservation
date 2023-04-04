@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BEBarberShop.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20230329182226_initial")]
+    [Migration("20230403183040_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -24,6 +24,35 @@ namespace BEBarberShop.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("BEBarberShop.Domain.Models.CalendarioReservaciones", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("FechaReserva")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HoraFinal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoraInicio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReservacionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservacionId");
+
+                    b.ToTable("CalendarioReservacion");
+                });
 
             modelBuilder.Entity("BEBarberShop.Domain.Models.Cliente", b =>
                 {
@@ -174,6 +203,10 @@ namespace BEBarberShop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TiempoEstimadoCita")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
@@ -278,6 +311,17 @@ namespace BEBarberShop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("BEBarberShop.Domain.Models.CalendarioReservaciones", b =>
+                {
+                    b.HasOne("BEBarberShop.Domain.Models.Reservacion", "Reservacion")
+                        .WithMany()
+                        .HasForeignKey("ReservacionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reservacion");
                 });
 
             modelBuilder.Entity("BEBarberShop.Domain.Models.Reservacion", b =>

@@ -13,6 +13,8 @@
         public DateTime Fecha { get; set; }
         public string Hora { get; set; }
 
+        public string TiempoEstimadoCita { get; set; }
+
         public DateTime FechaCreacion { get; set; }
 
         public int Activo { get; set; }

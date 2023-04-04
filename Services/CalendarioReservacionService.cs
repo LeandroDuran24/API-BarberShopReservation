@@ -7,10 +7,6 @@ namespace BEBarberShop.Services
     {
         private readonly ICalendarioReservacionService _calendarioReservacionService;
 
-        public CalendarioReservacionService(ICalendarioReservacionService calendarioReservacionService)
-        {
-            _calendarioReservacionService = calendarioReservacionService;
-        }
 
         public  async Task GuardarCalendarioReservacion(CalendarioReservaciones calendar)
         {

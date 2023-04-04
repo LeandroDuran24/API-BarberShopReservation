@@ -107,6 +107,7 @@ namespace BEBarberShop.Migrations
                     EstilistaId = table.Column<int>(type: "int", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Hora = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TiempoEstimadoCita = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Activo = table.Column<int>(type: "int", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
@@ -130,6 +131,28 @@ namespace BEBarberShop.Migrations
                         name: "FK_Reservacion_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CalendarioReservacion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReservacionId = table.Column<int>(type: "int", nullable: false),
+                    FechaReserva = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    HoraInicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HoraFinal = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CalendarioReservacion", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CalendarioReservacion_Reservacion_ReservacionId",
+                        column: x => x.ReservacionId,
+                        principalTable: "Reservacion",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -161,6 +184,11 @@ namespace BEBarberShop.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CalendarioReservacion_ReservacionId",
+                table: "CalendarioReservacion",
+                column: "ReservacionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reservacion_ClienteId",
                 table: "Reservacion",
                 column: "ClienteId");
@@ -189,6 +217,9 @@ namespace BEBarberShop.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CalendarioReservacion");
+
             migrationBuilder.DropTable(
                 name: "ReservacionDetalle");
 

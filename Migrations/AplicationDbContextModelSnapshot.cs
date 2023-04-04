@@ -22,6 +22,35 @@ namespace BEBarberShop.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("BEBarberShop.Domain.Models.CalendarioReservaciones", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("FechaReserva")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HoraFinal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoraInicio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReservacionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservacionId");
+
+                    b.ToTable("CalendarioReservacion");
+                });
+
             modelBuilder.Entity("BEBarberShop.Domain.Models.Cliente", b =>
                 {
                     b.Property<int>("Id")
@@ -171,6 +200,10 @@ namespace BEBarberShop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TiempoEstimadoCita")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
@@ -277,6 +310,17 @@ namespace BEBarberShop.Migrations
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("BEBarberShop.Domain.Models.CalendarioReservaciones", b =>
+                {
+                    b.HasOne("BEBarberShop.Domain.Models.Reservacion", "Reservacion")
+                        .WithMany()
+                        .HasForeignKey("ReservacionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reservacion");
+                });
+
             modelBuilder.Entity("BEBarberShop.Domain.Models.Reservacion", b =>
                 {
                     b.HasOne("BEBarberShop.Domain.Models.Cliente", "Cliente")
@@ -309,13 +353,13 @@ namespace BEBarberShop.Migrations
                     b.HasOne("BEBarberShop.Domain.Models.Reservacion", "Reservacion")
                         .WithMany("ListReservacionDetalle")
                         .HasForeignKey("ReservacionId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BEBarberShop.Domain.Models.Servicio", "Servicio")
                         .WithMany()
                         .HasForeignKey("ServicioId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Reservacion");
