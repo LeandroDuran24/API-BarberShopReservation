@@ -30,9 +30,6 @@ namespace BEBarberShop.Controllers
                 CalendarioReservaciones calendario = new CalendarioReservaciones();
                 var identity = HttpContext.User.Identity as ClaimsIdentity;
                 int idUsuario = JwtConfiguration.GetTokenIdUsuario(identity);
-                string horaFinal = Convert.ToString(Convert.ToInt32(reserva.Hora) + Convert.ToInt32(reserva.TiempoEstimadoCita));
-
-
 
               
 
@@ -48,7 +45,7 @@ namespace BEBarberShop.Controllers
                 calendario.ReservacionId = reserva.Id;
                 calendario.FechaReserva = reserva.Fecha;
                 calendario.HoraInicio = reserva.Hora;
-                calendario.HoraFinal = ;
+                calendario.HoraFinal =CalcularHoraFinal(reserva.Hora,reserva.TiempoEstimadoCita) ;
                 await calendarioReservacionRepository.GuardarCalendarioReservacion(calendario);
 
 
@@ -154,6 +151,7 @@ namespace BEBarberShop.Controllers
             string[] tmpCita = tiempoEstimado.Split(":");
 
             horaFormateado = horaFormateado.AddMinutes(Convert.ToInt32(tmpCita[1]));
+            horaFormateado = horaFormateado.AddHours(Convert.ToInt32(tmpCita[0]));
            
 
             return Convert.ToString((horaFormateado).ToString("H:mm"));

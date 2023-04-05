@@ -7,6 +7,11 @@ namespace BEBarberShop.Services
     {
         private readonly ICalendarioReservacionService _calendarioReservacionService;
 
+        public async Task<List<CalendarioReservaciones>> GetReservacionesCalendario(int idEstilista)
+        {
+            var lista = await _calendarioReservacionService.GetReservacionesCalendario(idEstilista);
+            return lista;
+        }
 
         public  async Task GuardarCalendarioReservacion(CalendarioReservaciones calendar)
         {

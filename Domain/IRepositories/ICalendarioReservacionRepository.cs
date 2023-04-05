@@ -6,5 +6,7 @@ namespace BEBarberShop.Domain.IRepositories
     {
 
         Task GuardarCalendarioReservacion(CalendarioReservaciones calendar);
+
+        Task<List<CalendarioReservaciones>> GetReservacionesCalendario(int idEstilista);
     }
 }
