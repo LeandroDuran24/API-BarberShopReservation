@@ -10,5 +10,7 @@
         public DateTime FechaReserva { get; set; }
         public string HoraInicio { get; set; }
         public string HoraFinal { get; set; }
+
+        public int Activo { get; set; }
     }
 }

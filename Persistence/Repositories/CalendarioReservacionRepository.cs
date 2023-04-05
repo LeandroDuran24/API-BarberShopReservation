@@ -14,9 +14,17 @@ namespace BEBarberShop.Persistence.Repositories
             this.aplicationDbContext = aplicationDbContext; 
         }
 
-        public async Task<List<CalendarioReservaciones>> GetReservacionesCalendario(int idEstilista)
+        public async Task EliminarFechaReservaCalendario(int idReserva)
         {
-            var lista = await aplicationDbContext.CalendarioReservacion.Where(x => x.Reservacion.EstilistaId == idEstilista & x.FechaReserva.Date == DateTime.Now.Date).ToListAsync();
+            var reserva = await aplicationDbContext.CalendarioReservacion.Where(x => x.ReservacionId == idReserva).FirstOrDefaultAsync();            
+            reserva.Activo = 0;
+            aplicationDbContext.Entry(reserva).State = EntityState.Modified;
+            await aplicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<CalendarioReservaciones>> GetReservacionesCalendario(int idEstilista, DateTime fechaReserva)
+        {
+            var lista = await aplicationDbContext.CalendarioReservacion.Where(x => x.Reservacion.EstilistaId == idEstilista &x.Activo==1 & x.FechaReserva.Date == fechaReserva.Date).ToListAsync();
 
             return lista;
         }

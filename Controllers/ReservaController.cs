@@ -45,6 +45,7 @@ namespace BEBarberShop.Controllers
                 calendario.ReservacionId = reserva.Id;
                 calendario.FechaReserva = reserva.Fecha;
                 calendario.HoraInicio = reserva.Hora;
+                calendario.Activo = 1;
                 calendario.HoraFinal =CalcularHoraFinal(reserva.Hora,reserva.TiempoEstimadoCita) ;
                 await calendarioReservacionRepository.GuardarCalendarioReservacion(calendario);
 
@@ -122,11 +123,13 @@ namespace BEBarberShop.Controllers
             {
 
                 var reserva = await reservacionRepository.GetReservacion(idReserva);
-
+                
                 if (reserva != null)
                 {
 
                     await reservacionRepository.EliminarReservacion(reserva);
+                    await calendarioReservacionRepository.EliminarFechaReservaCalendario(idReserva);
+
                     return Ok(new { message = "Se ha eliminado la Reservacion" });
                 }
                 else

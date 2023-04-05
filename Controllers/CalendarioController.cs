@@ -16,13 +16,13 @@ namespace BEBarberShop.Controllers
             this._calendarioReservacionRepository = calendarioReservacionRepository;
         }
 
-        [HttpGet("{idEstilista}")]
+        [HttpGet("{idEstilista}/{fechaReserva}")]
 
-        public async Task<IActionResult>Get(int idEstilista)
+        public async Task<IActionResult>Get(int idEstilista,string fechaReserva)
         {
             try
             {
-                var calendarioReservaciones = await _calendarioReservacionRepository.GetReservacionesCalendario(idEstilista);
+                var calendarioReservaciones = await _calendarioReservacionRepository.GetReservacionesCalendario(idEstilista,Convert.ToDateTime(fechaReserva));
                 return Ok(calendarioReservaciones);
 
             }
