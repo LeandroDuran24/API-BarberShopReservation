@@ -74,6 +74,13 @@ namespace BEBarberShop.Persistence.Repositories
             return reservacion;
         }
 
+        public async Task<List<Reservacion>> GetReservacionesHoy()
+        {
+            var listReservaciones = await _aplicationDbContext.Reservacion.Where(x => x.Activo == 1 && x.Fecha == DateTime.Today).ToListAsync();
+
+            return listReservaciones;
+        }
+
         public async Task GuardarReservacion(Reservacion reserva)
         {
             try

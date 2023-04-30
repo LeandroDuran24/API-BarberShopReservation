@@ -35,6 +35,11 @@ namespace BEBarberShop.Services
           return await reservacionRepository.GetReservacion(idReserva);   
         }
 
+        public async Task<Reservacion> GetReservacionesHoy()
+        {
+            return await reservacionRepository.GetReservacionesHoy();
+        }
+
         public async Task GuardarReservacion(Reservacion reserva)
         {
             await reservacionRepository.GuardarReservacion(reserva);
