@@ -4,7 +4,7 @@ using BEBarberShop.Domain.Models;
 
 namespace BEBarberShop.Services
 {
-    public class ReservacionService:IReservacionService
+    public class ReservacionService : IReservacionService
     {
 
         private readonly IReservacionRepository reservacionRepository;
@@ -35,7 +35,7 @@ namespace BEBarberShop.Services
           return await reservacionRepository.GetReservacion(idReserva);   
         }
 
-        public async Task<Reservacion> GetReservacionesHoy()
+        public async Task<List<Reservacion>> GetReservacionesHoy()
         {
             return await reservacionRepository.GetReservacionesHoy();
         }

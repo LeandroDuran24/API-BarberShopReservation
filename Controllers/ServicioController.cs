@@ -107,7 +107,7 @@ namespace BEBarberShop.Controllers
                 }
                 else
                 {
-                    return BadRequest(new { message = "No se ha encontrado el servicio" });
+                    return NotFound(new { message = "No se ha encontrado el servicio" });
                 }
             }
             catch (Exception ex)

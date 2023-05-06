@@ -97,7 +97,7 @@ namespace BEBarberShop.Controllers
                 }
                 else
                 {
-                    return BadRequest(new { message = "No se ha encontrado el usuario" });
+                    return NotFound(new { message = "No se ha encontrado el usuario" });
                 }
             }
             catch (Exception ex)

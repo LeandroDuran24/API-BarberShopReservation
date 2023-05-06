@@ -12,7 +12,7 @@ namespace BEBarberShop.Domain.IRepositories
 
         Task<Reservacion> GetReservacion(int idReserva);
 
-        Task<List<ReservacionDetalle>> GetReservacionesHoy();
+        Task<List<Reservacion>> GetReservacionesHoy();
 
 
         Task EliminarReservacion(Reservacion reserva);

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BEBarberShop.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class _11 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -144,7 +144,8 @@ namespace BEBarberShop.Migrations
                     ReservacionId = table.Column<int>(type: "int", nullable: false),
                     FechaReserva = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HoraInicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HoraFinal = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    HoraFinal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Activo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

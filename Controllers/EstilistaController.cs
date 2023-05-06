@@ -98,7 +98,7 @@ namespace BEBarberShop.Controllers
                 }
                 else
                 {
-                    return BadRequest(new { message = "No se ha encontrado el estilista" });
+                    return NotFound(new { message = "No se ha encontrado el estilista" });
                 }
             }
             catch (Exception ex)

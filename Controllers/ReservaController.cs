@@ -74,6 +74,23 @@ namespace BEBarberShop.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetReservacionesHoy")]
+
+        public async Task<IActionResult> GetReservacionesHoy()
+        {
+            try
+            {
+                var listReservacionesHoy = await reservacionRepository.GetReservacionesHoy();
+                return Ok(listReservacionesHoy);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [HttpGet]
         [Route("GetReservacionServicios/{idReserva}")]
@@ -134,7 +151,8 @@ namespace BEBarberShop.Controllers
                 }
                 else
                 {
-                    return BadRequest(new { message = "No se ha encontrado la reservacion" });
+                    //return NotFound();
+                    return NotFound(new { message = "No se ha encontrado la reservacion" });
                 }
 
             }

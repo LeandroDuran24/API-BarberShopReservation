@@ -30,6 +30,9 @@ namespace BEBarberShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Activo")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("FechaReserva")
                         .HasColumnType("datetime2");
 
