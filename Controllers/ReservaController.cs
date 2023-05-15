@@ -2,6 +2,8 @@
 using BEBarberShop.Domain.Models;
 using BEBarberShop.Persistence.Repositories;
 using BEBarberShop.Utilidades;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -23,6 +25,8 @@ namespace BEBarberShop.Controllers
 
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public async Task<IActionResult> Post([FromBody] Reservacion reserva)
         {
             try
@@ -60,6 +64,8 @@ namespace BEBarberShop.Controllers
         }
 
         [HttpGet]
+//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public async Task<IActionResult> Get()
         {
             try
@@ -76,12 +82,14 @@ namespace BEBarberShop.Controllers
 
         [HttpGet]
         [Route("GetReservacionesHoy")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
         public async Task<IActionResult> GetReservacionesHoy()
         {
             try
             {
                 var listReservacionesHoy = await reservacionRepository.GetReservacionesHoy();
+                listReservacionesHoy.OrderBy(x => x.EstilistaId).ToList();
                 return Ok(listReservacionesHoy);
             }
             catch (Exception ex)
@@ -94,6 +102,8 @@ namespace BEBarberShop.Controllers
 
         [HttpGet]
         [Route("GetReservacionServicios/{idReserva}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
 
         public async Task<IActionResult> GetServicios(int idReserva)
         {
@@ -110,6 +120,8 @@ namespace BEBarberShop.Controllers
         }
 
         [HttpPut]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public async Task<IActionResult> Put([FromBody]Reservacion reserva)
         {
             try
@@ -134,6 +146,8 @@ namespace BEBarberShop.Controllers
              
         }
         [HttpDelete("{idReserva}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public async Task<IActionResult> Delete(int idReserva)
         {
             try

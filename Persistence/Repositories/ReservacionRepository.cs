@@ -76,7 +76,13 @@ namespace BEBarberShop.Persistence.Repositories
 
         public async Task<List<Reservacion>> GetReservacionesHoy()
         {
-            var listReservaciones = await _aplicationDbContext.Reservacion.Where(x => x.Activo == 1 && x.Fecha == DateTime.Today).ToListAsync();
+            var listReservaciones = await _aplicationDbContext.Reservacion.Where(x => x.Activo == 1 && x.Fecha.Date == DateTime.Today).Select(x=> new Reservacion
+            {
+                Fecha = x.Fecha,
+                Hora= x.Hora,
+                Cliente = new Cliente {Nombre=x.Cliente.Nombre, Apellidos =x.Cliente.Apellidos },
+                Estilista = new Estilista { Nombre = x.Estilista.Nombre, Apellidos = x.Estilista.Apellidos }
+            }).ToListAsync();
 
             return listReservaciones;
         }

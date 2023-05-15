@@ -131,7 +131,7 @@ namespace BEBarberShop.Controllers
 
         [HttpPut]
         [Route("CambiarPassword")]
-       // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+      //  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CambiarPassword([FromBody] CambiarPasswordDTO user)
         {
             try
